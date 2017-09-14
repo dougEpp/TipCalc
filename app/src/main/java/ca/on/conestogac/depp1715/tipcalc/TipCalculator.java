@@ -1,7 +1,6 @@
 package ca.on.conestogac.depp1715.tipcalc;
 
 import java.text.NumberFormat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
@@ -13,7 +12,7 @@ import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 import android.app.Activity;
 
-public class TipCalculator extends Activity implements OnEditorActionListener, OnClickListener {
+public class TipCalculator extends Activity implements OnClickListener, View.OnKeyListener {
     private EditText billAmountEditText;
     private TextView percentTextView;
     private Button   percentUpButton;
@@ -38,7 +37,7 @@ public class TipCalculator extends Activity implements OnEditorActionListener, O
         totalTextView = (TextView) findViewById(R.id.totalTextView);
         roundUp = (CheckBox) findViewById(R.id.checkbox_roundup);
 
-        billAmountEditText.setOnEditorActionListener(this);
+        billAmountEditText.setOnKeyListener(this);
         percentUpButton.setOnClickListener(this);
         percentDownButton.setOnClickListener(this);
         roundUp.setOnClickListener(this);
@@ -76,7 +75,7 @@ public class TipCalculator extends Activity implements OnEditorActionListener, O
     }
 
     @Override
-    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+    public boolean onKey(View view, int i, KeyEvent keyEvent) {
         calculateAndDisplay();
         return false;
     }
