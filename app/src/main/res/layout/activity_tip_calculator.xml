@@ -80,7 +80,8 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/percentLabel"
         android:layout_below="@+id/percentLabel"
-        android:text="@string/round_up"/>
+        android:text="@string/round_up"
+        android:checked="true"/>
 
     <!-- the tip amount -->
 
