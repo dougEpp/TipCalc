@@ -9,7 +9,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.TextView.OnEditorActionListener;
 import android.app.Activity;
 
 public class TipCalculator extends Activity implements OnClickListener, View.OnKeyListener {
@@ -29,19 +28,21 @@ public class TipCalculator extends Activity implements OnClickListener, View.OnK
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tip_calculator);
 
-        billAmountEditText = (EditText) findViewById(R.id.billAmountEditText);
-        percentTextView = (TextView) findViewById(R.id.percentTextView);
-        percentUpButton = (Button) findViewById(R.id.percentUpButton);
-        percentDownButton = (Button) findViewById(R.id.percentDownButton);
-        tipTextView = (TextView) findViewById(R.id.tipTextView);
-        totalTextView = (TextView) findViewById(R.id.totalTextView);
-        roundUp = (CheckBox) findViewById(R.id.checkbox_roundup);
+        billAmountEditText = findViewById(R.id.billAmountEditText);
+        percentTextView = findViewById(R.id.percentTextView);
+        percentUpButton = findViewById(R.id.percentUpButton);
+        percentDownButton = findViewById(R.id.percentDownButton);
+        tipTextView = findViewById(R.id.tipTextView);
+        totalTextView = findViewById(R.id.totalTextView);
+        roundUp = findViewById(R.id.checkbox_roundup);
 
+        // set event listeners for all inputs
         billAmountEditText.setOnKeyListener(this);
         percentUpButton.setOnClickListener(this);
         percentDownButton.setOnClickListener(this);
         roundUp.setOnClickListener(this);
 
+        // calculate the initial tip amount
         calculateAndDisplay();
     }
 
@@ -61,6 +62,8 @@ public class TipCalculator extends Activity implements OnClickListener, View.OnK
         float totalAmount = billAmount + tipAmount;
 
         if (roundUp.isChecked()){
+            // Round up to the nearest dollar
+            // TODO: Round up to the nearest $5 or $10
             totalAmount = (float)Math.ceil(totalAmount);
             tipAmount = totalAmount - billAmount;
         }
@@ -76,6 +79,7 @@ public class TipCalculator extends Activity implements OnClickListener, View.OnK
 
     @Override
     public boolean onKey(View view, int i, KeyEvent keyEvent) {
+        //TODO: Allow only 2 decimal places
         calculateAndDisplay();
         return false;
     }
